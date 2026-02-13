@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MyShop Elite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#141e30,#243b55);
+    color:white;
+    overflow-x:hidden;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+/* When page loads */
+body.loaded{
+    opacity:1;
+}
+
+/* Navbar */
+header{
+    position:sticky;
+    top:0;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transform:translateY(-100px);
+    opacity:0;
+    transition:all 1s ease;
+}
+
+header.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+.cart{
+    background:#ff0055;
+    padding:5px 10px;
+    border-radius:20px;
+}
+
+/* Hero */
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.hero h1{
+    font-size:45px;
+    transform:translateY(50px);
+    opacity:0;
+    transition:all 1s ease;
+}
+
+.hero.show h1{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* Products */
+.products{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    padding:40px;
+}
+
+.card{
+    width:260px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+    transform:translateY(50px);
+    opacity:0;
+    transition:all 0.8s ease;
+}
+
+.card img{
+    width:100%;
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#00ffd5;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(45deg,#ff0080,#7928ca);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 15px #ff0080;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+}
+
+/* Responsive */
+@media(max-width:600px){
+    .products{
+        flex-direction:column;
+        align-items:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header id="navbar">
+    <h2>MyShop Elite</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Cart <span class="cart" id="cart-count">0</span></a>
+    </nav>
+</header>
+
+<section class="hero" id="hero">
+    <h1>Premium Shopping Experience</h1>
+</section>
+
+<section class="products">
+
+    <div class="card"> 
+        <img src="https://via.placeholder.com/250">
+        <h3>Smart Watch</h3>
+        <p class="price">₹2999</p>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+
+    <div class="card"> 
+        <img src="https://via.placeholder.com/250">
+        <h3>Gaming Mouse</h3>
+        <p class="price">₹1499</p>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+
+    <div class="card"> 
+        <img src="https://via.placeholder.com/250">
+        <h3>Wireless Headphones</h3>
+        <p class="price">₹1999</p>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+
+</section>
+
+<footer>
+    © 2026 MyShop Elite | Designed by Satwik
+</footer>
+
+<script>
+/* Page Load Animation */
+window.addEventListener("load", ()=>{
+    document.body.classList.add("loaded");
+
+    setTimeout(()=>{
+        document.getElementById("navbar").classList.add("show");
+    },300);
+
+    setTimeout(()=>{
+        document.getElementById("hero").classList.add("show");
+    },700);
+
+    let cards = document.querySelectorAll(".card");
+    cards.forEach((card,index)=>{
+        setTimeout(()=>{
+            card.style.opacity="1";
+            card.style.transform="translateY(0)";
+        },1000 + (index*300));
+    });
+});
+
+/* Cart System */
+let count = 0;
+function addToCart(){
+    count++;
+    document.getElementById("cart-count").innerText = count;
+}
+</script>
+
+</body>
+</html>
